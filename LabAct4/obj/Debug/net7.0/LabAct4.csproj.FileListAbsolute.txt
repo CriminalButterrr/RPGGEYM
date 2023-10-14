@@ -1,0 +1,14 @@
+C:\Users\Jordan\Desktop\Game\labact4\bin\Debug\net7.0\LabAct4.exe
+C:\Users\Jordan\Desktop\Game\labact4\bin\Debug\net7.0\LabAct4.deps.json
+C:\Users\Jordan\Desktop\Game\labact4\bin\Debug\net7.0\LabAct4.runtimeconfig.json
+C:\Users\Jordan\Desktop\Game\labact4\bin\Debug\net7.0\LabAct4.dll
+C:\Users\Jordan\Desktop\Game\labact4\bin\Debug\net7.0\LabAct4.pdb
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.AssemblyInfoInputs.cache
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.AssemblyInfo.cs
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.csproj.CoreCompileInputs.cache
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.dll
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\refint\LabAct4.dll
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.pdb
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\LabAct4.genruntimeconfig.cache
+C:\Users\Jordan\Desktop\Game\labact4\obj\Debug\net7.0\ref\LabAct4.dll
