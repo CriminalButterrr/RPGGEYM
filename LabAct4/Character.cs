@@ -14,7 +14,7 @@ class Character
        Defense = random.Next(0,6); 
     }
 
-    public void Attack(Character target)
+    public virtual void Attack(Character target)
     {
         int damage = this.Strength - target.Defense; // Random damage between 10 to 20
         target.Health -= damage;

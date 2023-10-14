@@ -8,21 +8,31 @@ class Program
     static Player playerCharacter;
     static Inventory inventory;
     static Random random = new Random();
+    public enum GameState
+    {
+        MainMenu,
+        CharacterCreation,
+        Battle,
+        Looting,
+        viewInventory
+    }
+    
     static void Main(string[] args)
     {
         // Initialize stack to manage game states
-        Stack<string> gameStateStack = new Stack<string>();
-        gameStateStack.Push("MainMenu");
+        
+        Stack<GameState> gameStateStack = new Stack<GameState>();
+        gameStateStack.Push(GameState.MainMenu);
 
         bool isRunning = true;
         
         while (isRunning)
         {
             // Get the current game state from the stack
-            string currentState = gameStateStack.Peek();
+            GameState currentState = gameStateStack.Peek();
 
             // Main Menu State
-            if (currentState == "MainMenu")
+            if (currentState == GameState.MainMenu)
             {
                 Console.WriteLine("=== Main Menu ===");
                 Console.WriteLine("1. New Game");
@@ -35,7 +45,7 @@ class Program
                 if (choice == "1")
                 {
                     // Transition to Character Creation State
-                    gameStateStack.Push("CharacterCreation");
+                    gameStateStack.Push(GameState.CharacterCreation);
                 }
                 else if (choice == "2")
                 {
@@ -48,7 +58,7 @@ class Program
                 }
             }
             // Character Creation State
-            else if (currentState == "CharacterCreation")
+            else if (currentState == GameState.CharacterCreation)
             {
                 Console.Clear();
                 Console.WriteLine("=== Character Creation ===");
@@ -66,14 +76,15 @@ class Program
                 
                 inventory = new Inventory();
                 playerCharacter.printStats();
+                Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
 
                 // Transition to Battle State
                 gameStateStack.Pop();
-                gameStateStack.Push("Battle");
+                gameStateStack.Push(GameState.Battle);
             }
             // Battle State
-            else if (currentState == "Battle")
+            else if (currentState == GameState.Battle)
             {
                 Enemy enemy = new Enemy();
 
@@ -82,6 +93,7 @@ class Program
                 Console.WriteLine($"A wild {enemy.Name} appears!");
                 while (playerCharacter.IsAlive() && enemy.IsAlive())
                 {
+                    Console.WriteLine("-------------------------");
                     Console.WriteLine($"{playerCharacter.Name}'s health is {playerCharacter.Health} || {enemy.Name}'s health is {enemy.Health}");
                     Console.WriteLine("1. Attack");
                     Console.WriteLine("2. Heal");
@@ -98,28 +110,32 @@ class Program
                     {
                         playerCharacter.Heal();
                         enemy.Attack(playerCharacter);
-                        Console.WriteLine($"You healed yourself. Current Health: {playerCharacter.Health}");
+                        Console.WriteLine($"Current Health of {playerCharacter.Name}: {playerCharacter.Health}");
                     }
                     else if (choice == 3)
                     {
-                        gameStateStack.Push("MainMenu");
+                        gameStateStack.Push(GameState.MainMenu);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input. Please try again");
                     }
 
                     if (!enemy.IsAlive())
                     {
-                        Console.WriteLine($"{playerCharacter.Name} has slaine {enemy.Name}");
-                        gameStateStack.Push("Looting");
+                        Console.WriteLine($"{playerCharacter.Name} has slain the {enemy.Name}");
+                        gameStateStack.Push(GameState.Looting);
                     }
-
-                    if (!playerCharacter.IsAlive())
+                    else if (!playerCharacter.IsAlive())
                     {
                         Console.WriteLine("You have been slained.");
-                        gameStateStack.Push("MainMenu");
+                        gameStateStack.Push(GameState.MainMenu);
                     }
                 }
             }
             // Looting State
-            else if (currentState == "Looting")
+            else if (currentState == GameState.Looting)
             {
                 
                 Console.WriteLine("=== Looting State ===");
@@ -140,7 +156,7 @@ class Program
                     if (viewInventory == "yes")
                     {
                         Console.WriteLine("Viewing Invetory...");
-                        gameStateStack.Push("viewInventory");
+                        gameStateStack.Push(GameState.viewInventory);
                     }
                     else if (viewInventory == "no")
                     {
@@ -153,14 +169,13 @@ class Program
                 }
             }
             // View Inventory State
-            else if (currentState == "viewInventory")
+            else if (currentState == GameState.viewInventory)
             {
                 Console.WriteLine("=== Inventory ===");
                 inventory.ViewItems();  
                 Console.WriteLine("Press any key to continue.");
                 Console.ReadKey();
-                gameStateStack.Pop();
-                gameStateStack.Pop();
+                gameStateStack.Push(GameState.Battle);
             }
 
         }

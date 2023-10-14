@@ -10,17 +10,27 @@ class Player:Character
         Name = name;
     }
 
+    public override void Attack(Character target)
+    {
+        base.Attack(target);
+        if (!canUseHeal)
+        {
+            canUseHeal = true;
+        }
+    }
     public void Heal()
     {
         if (canUseHeal)
         {
             int healAmount = (int)(0.2 * Health);
-            Health += healAmount;
+            Console.WriteLine($"You have healed for {healAmount} health points.");
+            this.Health += healAmount;
             canUseHeal = false;
         }
         else
         {
-            Console.WriteLine("You can't use heal right now. Wait for your next turn.");
+            Console.WriteLine("Heal is on cooldown! Wait for the next turn.");
+            canUseHeal = true;
         }
     } 
 }
